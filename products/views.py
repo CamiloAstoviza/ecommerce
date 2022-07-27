@@ -7,8 +7,8 @@ from prometheus_client import CONTENT_TYPE_LATEST
 from products.models import Product
 
 def Create_product(request):
-    new_person = Product.objets.create(Refresco = '',Description = '',CONT= 1)
+    new_product = Product.objects.create(Refresco = 'Coca cola',Description = 'La de siempre al mejor precio',CONT= 2.0)
     context = {
-        'new_person':new_person
+        'new_product':new_product
     }
     return render(request,'new_product.html',context=context)
