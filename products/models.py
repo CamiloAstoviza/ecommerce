@@ -4,7 +4,7 @@ from django.db import models
 
 class Product(models.Model):
     
-        Refresco = models.CharField(max_length=40)
+        Refresco = models.CharField(max_length=40,unique=True)
         Description = models.CharField(max_length=200,blank=True,null=True)
         CONT = models.FloatField()
         
