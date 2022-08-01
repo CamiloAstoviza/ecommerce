@@ -1,3 +1,16 @@
-<h1>{{new_product.Refresco}}</h1>
-<h1>{{new_product.Description}}</h1>
-<h1>{{new_product.CONT}}</h1>
+{% extends "templates/product/index.html" %}
+{% block title %}
+    new product
+{% endblock %}
+
+{% block contenidoCambia %}
+<div class="card" style="width: 18rem;">
+    <img src="..." class="card-img-top" alt="...">
+    <div class="card-body">
+      <h5 class="card-title">{{new_product.Refresco}}</h5>
+      <p class="card-text">{{new_product.Description}}</p>
+      <p class="card-text">{{new_product.CONT}}</p>
+      <a href="#" class="btn btn-primary">Go somewhere</a>
+    </div>
+  </div>
+{% endblock %}

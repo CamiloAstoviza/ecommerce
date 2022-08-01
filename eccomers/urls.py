@@ -7,6 +7,6 @@ from numpy import product
 urlpatterns = [
     path('admin/', admin.site.urls),
     path('product/',include('products.urls')),
-    path('all_product/',include('products.urls'))
+    path('all_products/',include('products.urls'))
 
 ]

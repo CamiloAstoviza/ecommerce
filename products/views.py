@@ -3,7 +3,7 @@ from django.shortcuts import render
 from products.models import Product
 from django.http import request
 def Create_product(request):
-    new_product = Product.objects.create(Refresco = 'Sprite',Description = 'te hace eruptar',CONT= 2.0)
+    new_product = Product.objects.create (Refresco = 'Sprite',Description = 'te hace eruptar',CONT= 2.0)
     context = {
         'new_product':new_product
     }
@@ -13,6 +13,6 @@ def Create_product(request):
 def allproducts(request):
     Allproducts = Product.objects.all()
     context = {
-        'allproducts': Allproducts
+        'Allproducts': Allproducts
     }
     return render(request,'product/all_products.html',context=context)
