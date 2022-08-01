@@ -1,0 +1,16 @@
+
+{% if miformulario.errors %}
+
+<p style="color: red;"> </p>
+{% endif %}
+<form action=""method='POST'>{% csrf_token %}
+    <table>
+        
+        {{ miformulario.as_table }}
+
+
+    </table>
+    <input type="sumbit", value="Enviar">
+
+
+</form>
