@@ -1,5 +1,6 @@
 from multiprocessing import context
 from django.shortcuts import render
+from numpy import product
 from products.models import Product
 from django.http import request
 from products.forms import Formulario
@@ -29,7 +30,7 @@ def formulario(request):
 
         if miformulario.is_valid:
             informacion = miformulario.cleaned_data
-            nombre = Product(refresco=informacion['Refresco'],cont=informacion['CONT'])
+            nombre = Product(Refresco=informacion['refresco'],CONT=informacion['cont'])
             nombre.save()
             return render(request,'product/all_products.html')
     else:
