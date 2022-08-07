@@ -1,4 +1,10 @@
+{% extends "templates/product/index.html" %}
 
+{% block title %}
+     formulario
+{% endblock %}
+
+{%block contenidoCambia%}
 {% if miformulario.errors %}
 
 <p style="color: red;"> </p>
@@ -14,3 +20,5 @@
 
 
 </form>
+
+{% endblock %}

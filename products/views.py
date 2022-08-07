@@ -1,5 +1,7 @@
 from multiprocessing import context
-from django.shortcuts import render
+from typing import Container
+from unicodedata import name
+from django.shortcuts import redirect, render
 from numpy import product
 from products.models import Product
 from django.http import request
@@ -25,14 +27,18 @@ def formulario(request):
         miformulario = Formulario(request.POST)
         
         print(miformulario)
-
-
-
-        if miformulario.is_valid:
+        if miformulario.is_valid():
             informacion = miformulario.cleaned_data
             nombre = Product(Refresco=informacion['refresco'],CONT=informacion['cont'])
             nombre.save()
-            return render(request,'product/all_products.html')
+            return redirect(formulario)
     else:
         miformulario=Formulario()
     return render(request,'formulario/formulario.html',{"miformulario":miformulario})
+
+
+def search(request):
+    search = request.GET['search']
+    products = Product.objects.filter(Refresco__icontains=search)
+    context = {'products':products}
+    return render (request, 'product/search.html',context=context)
