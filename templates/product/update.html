@@ -1,0 +1,22 @@
+{% extends "templates/product/index.html" %}
+
+{% block title %}
+     Update
+{% endblock %}
+
+{%block contenidoCambia%}
+
+<form action="" method='POST'>
+{% csrf_token %}
+
+<table>
+        
+        {{ form.as_table }}
+
+</table>
+
+<p><input type="submit" , value="Enviar"></p>
+
+</form>
+
+{% endblock %}

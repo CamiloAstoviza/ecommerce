@@ -9,5 +9,7 @@ urlpatterns = [
     path('product/',include('products.urls')),
     path('all_products/',include('products.urls')),
     path('formulario/',include('products.urls')),
-    path('search/',include('products.urls'))
+    path('search/',include('products.urls')),
+    path('delete/',include('products.urls')),
+    path('update/',include('products.urls'))
 ]

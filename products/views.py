@@ -1,4 +1,5 @@
 from multiprocessing import context
+from tkinter.tix import Form
 from typing import Container
 from unicodedata import name
 from django.shortcuts import redirect, render
@@ -29,7 +30,7 @@ def formulario(request):
         print(miformulario)
         if miformulario.is_valid():
             informacion = miformulario.cleaned_data
-            nombre = Product(Refresco=informacion['refresco'],CONT=informacion['cont'])
+            nombre = Product(Refresco=informacion['refresco'],CONT=informacion['cont'],Description=informacion['description'])
             nombre.save()
             return redirect(formulario)
     else:
@@ -38,7 +39,43 @@ def formulario(request):
 
 
 def search(request):
+
     search = request.GET['search']
     products = Product.objects.filter(Refresco__icontains=search)
     context = {'products':products}
     return render (request, 'product/search.html',context=context)
+
+def delete_product(request,pk):
+    if request.method == 'GET':
+        product = Product.objects.get(pk=pk)
+        context={'product':product}
+        return render(request,'product/delete.html',context=context)
+
+    elif request.method == 'POST':
+        product =Product.objects.get(pk=pk)
+        product.delete()
+        return redirect(allproducts)
+
+
+def update(request,pk):
+    if request.method == 'POST':
+        form = Formulario(request.POST)
+        if form.is_valid():
+            product =Product.objects.get(pk=pk)
+            product.Refresco = form.cleaned_data['refresco']
+            product.CONT = form.cleaned_data['cont']
+            product.Description = form.cleaned_data['description']
+            product.save()
+
+        return redirect(allproducts)
+
+
+    elif request.method == 'GET':
+        product =Product.objects.get(pk=pk)
+
+        form = Formulario(initial={
+                            'refresco':product.Refresco,
+                            'cont':product.CONT,
+                            'description':product.Description})
+        context={'form':form}
+    return render(request,'product/update.html',context=context)

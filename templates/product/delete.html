@@ -1,0 +1,28 @@
+
+{% extends "templates/product/index.html" %}
+
+{% block title %}
+     products
+{% endblock %}
+
+
+
+{% block contenidoCambia %}
+
+    <div class="card" style="width: 18rem;">
+        <h1 class="card-title" style="color: red;">Esta seguro que desea eliminar?  {{product.Refresco}}</h1>
+        
+        <img src="https://i.pinimg.com/originals/81/c8/dd/81c8ddec339dfd419dd855d766aa6079.jpg" class="card-img-top" alt="...">
+        <div class="card-body">
+          <h5 class="card-title">{{product.Refresco}}</h5>
+          <p class="card-text">{{product.Description}}</p>
+          <p class="card-text">{{product.CONT}}</p>
+          <form action="" method="POST">{% csrf_token %}
+            <p><input type="submit" value="Eliminar" class="btn-danger"></p>
+          </form>
+          
+          
+        </div>
+    </div>
+
+{% endblock %}
