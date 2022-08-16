@@ -1,4 +1,3 @@
-
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -22,11 +21,27 @@
     <div class="collapse navbar-collapse" id="navbarSupportedContent">
       <ul class="navbar-nav mr-auto">
         <li class="nav-item active">
-          <a class="nav-link" href="/product/all_products/">products <span class="sr-only">(current)</span></a>
+          <a class="nav-link" href="/product/all_products/" >products <span class="sr-only">(current)</span></a>
         </li>
+        {% if request.user.is_authenticated and request.user.is_superuser%}
+          <li class="nav-item active">
+            <a class="nav-link" href="/formulario/formulario/"  style="margin-right: 30rem ;" >new product<span class="sr-only">(current)</span></a>
+          </li>
+        {%endif%}
+        {%if request.user.is_authenticated %}
         <li class="nav-item active">
-          <a class="nav-link" href="/formulario/formulario/">new product<span class="sr-only">(current)</span></a>
+          <a class="nav-link" href="/users/logout/">LOGOUT<span class="sr-only">(current)</span></a>
         </li>
+        {%else %}
+        <li class="nav-item active">
+          <a class="nav-link" href="/users/login/">LOGIN<span class="sr-only">(current)</span></a>
+        </li>
+
+        <li class="nav-item active">
+          <a class="nav-link" href="/users/register/">REGISTER<span class="sr-only">(current)</span></a>
+        </li>
+        {%endif%}
+        
         <!-- <li class="nav-item">
           <a class="nav-link" href="/product/newproduct/">new_product</a>
         </li> -->

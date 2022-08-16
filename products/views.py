@@ -7,6 +7,7 @@ from numpy import product
 from products.models import Product
 from django.http import request
 from products.forms import Formulario
+from django.contrib.auth.decorators import login_required
 def Create_product(request):
     new_product = Product.objects.create (Refresco = 'Sprite',Description = 'te hace eruptar',CONT= 2.0)
     context = {
@@ -14,30 +15,32 @@ def Create_product(request):
     }
     return render(request,'product/new_product.html',context=context)
 
-
 def allproducts(request):
-    Allproducts = Product.objects.all()
-    context = {
-        'Allproducts': Allproducts
-    }
-    return render(request,'product/all_products.html',context=context)
+    if request.user.is_authenticated:
+        Allproducts = Product.objects.all()
+        context = {
+            'Allproducts': Allproducts
+        }
+        return render(request,'product/all_products.html',context=context)
+    return redirect('login')
+
 
 def formulario(request):
-
-    if request.method == 'POST':
-        miformulario = Formulario(request.POST)
+     if request.user.is_authenticated and  request.user.is_superuser:
+        if request.method == 'POST':
+            miformulario = Formulario(request.POST)
         
-        print(miformulario)
-        if miformulario.is_valid():
-            informacion = miformulario.cleaned_data
-            nombre = Product(Refresco=informacion['refresco'],CONT=informacion['cont'],Description=informacion['description'])
-            nombre.save()
-            return redirect(formulario)
-    else:
-        miformulario=Formulario()
-    return render(request,'formulario/formulario.html',{"miformulario":miformulario})
-
-
+            print(miformulario)
+            if miformulario.is_valid():
+                informacion = miformulario.cleaned_data
+                nombre = Product(Refresco=informacion['refresco'],CONT=informacion['cont'],Description=informacion['description'])
+                nombre.save()
+                return redirect(formulario)
+        else:
+            miformulario=Formulario()
+        return render(request,'formulario/formulario.html',{"miformulario":miformulario})
+     return redirect('login')
+@login_required
 def search(request):
 
     search = request.GET['search']

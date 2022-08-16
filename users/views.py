@@ -6,6 +6,7 @@ from django.contrib.auth import login,logout,authenticate
 
 from users.forms import User_registrations_form
 
+
 def login_request(request):
     if request.method == 'POST':
         form =AuthenticationForm(request=request, data=request.POST)
