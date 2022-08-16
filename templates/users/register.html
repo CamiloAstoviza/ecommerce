@@ -1,0 +1,21 @@
+{% extends "templates/product/index.html" %}
+
+{% block title %}
+     register
+{% endblock %}
+
+{%block contenidoCambia%}
+
+<form action="" method='POST'>
+{% csrf_token %}
+    <table>
+        
+        {{ form.as_table }}
+
+
+    </table>
+    <p> <input type="submit" , value="register"> </p>
+
+</form>
+
+{% endblock %}
